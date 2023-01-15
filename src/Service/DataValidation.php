@@ -31,7 +31,7 @@ class DataValidation
                 $validantion = false;
             }
         }
-        if(preg_match($regex,$date) != 1){
+        if($date !=='' and $date != NULL  and preg_match($regex,$date) != 1){
             $validantion = false;
         }
         return $validantion;

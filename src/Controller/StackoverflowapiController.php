@@ -43,17 +43,11 @@ class StackoverflowapiController extends AbstractController
                     }
                     break;
                 case 'fromdate':
-                    if(!$datavalidation->dateValidation($parameter_url_data,$mandatory,$apidata['responseapi']['parametervalidation'][$p]['regex'])) {
-                        $returnData['ErrorMessages'][] = $apidata['responseapi']['errormessages'][$p];
-                    } else {
-                        $parameters_to_send[$p] = strtotime($parameter_url_data);
-                    }
-                    break;
-
                 case 'todate':
                     if(!$datavalidation->dateValidation($parameter_url_data,$mandatory,$apidata['responseapi']['parametervalidation'][$p]['regex'])) {
                         $returnData['ErrorMessages'][] = $apidata['responseapi']['errormessages'][$p];
                     } else {
+                        if($parameter_url_data!='' and $parameter_url_data != NULL)
                         $parameters_to_send[$p] = strtotime($parameter_url_data);
                     }
                     break;
