@@ -4,7 +4,25 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    stackoverflow:
+        responseapi:
+            url: 'https://api.stackexchange.com/2.3/questions?site=stackoverflow&'
+            parameters: ['tagged','fromdate','todate']
+            mandatory: ['tagged']
+            optional: ['fromdate','todate']
+            dateformat: ['YYYY-MM-DD']
+            parametervalidation:
+                tagged:
+                    maxtags: '5'
+                    tagsseparation: ';'
+                fromdate:
+                    regex: '/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/'
+                todate:
+                    regex: '/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/'
+            errormessages:
+                tagged: 'Error with tagged parameter, please correct it, the parameter is mandatory, and can have 1 tag, or more than one separated by ;. Max 5 Tags per request'
+                fromdate: 'Error with fromdate parameter, please correct it. The correct format is YYYY-MM-DD'
+                todate: 'Error with todate parameter, please correct it. The correct format is YYYY-MM-DD'
 services:
     # default configuration for services in *this* file
     _defaults:
